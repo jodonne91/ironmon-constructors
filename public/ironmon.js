@@ -8,11 +8,11 @@
   It also contains a property passed in as a parameter:
     - name
 */
-var Ironmon = function(name) {
+var Ironmon = function(name, type) {
   this.health = 25;
   this.power = 1;
   this.name = name;
-
+  this.type = type;
 }
 
 /*
@@ -65,8 +65,45 @@ Ironmon.prototype.active = function() {
 */
 Ironmon.prototype.attack = function(opponent) {
 
- var damage = Math.ceil(Math.random()*this.power);
- opponent.health -= damage;
- return damage;
-  
+  var damage = Math.ceil(Math.random()*this.power);
+
+
+  switch (this.type)
+  {
+    case 'fire':
+      if ( opponent.type === 'grass')
+      {
+        opponent.health -= damage * 2;
+        return damage * 2;
+      }
+      opponent.health -= damage;
+      return damage;
+
+
+    case 'water':
+      if ( opponent.type === 'fire')
+      {
+        opponent.health -= damage * 2;
+        return damage * 2;
+      }
+      opponent.health -= damage;
+      return damage;
+
+    case 'grass':
+      if ( opponent.type === 'water')
+      {
+        opponent.health -= damage * 2;
+        return damage * 2;
+      }
+      opponent.health -= damage;
+      return damage;
+
+    default :
+
+      opponent.health -= damage;
+      return damage;
+
+
+  }
+
 }
