@@ -12,6 +12,11 @@
 */
 var Game = function(leftName, rightName) {
 
+	this.turn = true;
+
+	this.left = new Ironmon(leftName);
+	this.right = new Ironmon(rightName);
+
 }
 
 /*
@@ -19,5 +24,16 @@ var Game = function(leftName, rightName) {
   Otherwise, it becomes true.
 */
 Game.prototype.takeTurn = function() {
+
+	if (this.turn)
+	{
+		this.turn = false;
+	}
+	else 
+	{
+		this.turn = true;
+	}
+
+
 
 }
